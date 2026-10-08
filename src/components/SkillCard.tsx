@@ -16,10 +16,14 @@ type Props = {
 const SkillCard = ({ item }: Props) => {
   const [copied, setCopied] = useState(false);
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText(item.installCommand);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(item.installCommand);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (error) {
+      setCopied(false);
+    }
   };
 
   return (
@@ -46,7 +50,11 @@ const SkillCard = ({ item }: Props) => {
             <img src="/logo512.png" alt="author avatar" className="avatar" />
             <div className="author-copy">
               <p>Maick</p>
-              <p>{new Date(item.createdAt as string).toLocaleDateString()}</p>
+              <p>
+                {item.createdAt
+                  ? new Date(item.createdAt).toLocaleDateString()
+                  : "Unknown date"}
+              </p>
             </div>
           </div>
           <p className="category">{item.category}</p>
