@@ -1,3 +1,4 @@
+import { usePostHog } from "@posthog/react";
 import { Link } from "@tanstack/react-router";
 import {
   ArrowBigUp,
@@ -14,14 +15,28 @@ type Props = {
 };
 
 const SkillCard = ({ item }: Props) => {
+  const posthog = usePostHog();
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(item.installCommand);
+      posthog.capture("skill_install_command_copied", {
+        skill_id: item.id,
+        skill_category: item.category,
+        tag_count: item.tags.length,
+      });
+      posthog.logger.info("install_command_copied", {
+        skill_id: item.id,
+        skill_category: item.category,
+        tag_count: item.tags.length,
+      });
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
-    } catch (error) {
+    } catch {
+      posthog.logger.warn("install_command_copy_failed", {
+        skill_category: item.category,
+      });
       setCopied(false);
     }
   };
