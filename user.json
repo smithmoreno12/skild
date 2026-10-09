@@ -1,0 +1,119 @@
+{
+  "id": "user_3KQSEhN9p2TO1jh4mEwnWdoG8jv",
+  "object": "user",
+  "username": null,
+  "first_name": "Carlos",
+  "last_name": "Valencia",
+  "locale": null,
+  "timezone": "America/Bogota",
+  "image_url": "https://img.clerk.com/eyJ0eXBlIjoiZGVmYXVsdCIsImlpZCI6Imluc18zS1BLRDFaM1c1cmJTaVF4cGNSdkNaQmNLSnciLCJyaWQiOiJ1c2VyXzNLUVNFaE45cDJUTzFqaDRtRXduV2RvRzhqdiIsImluaXRpYWxzIjoiQ1YifQ",
+  "has_image": false,
+  "primary_email_address_id": "idn_3KQS9cIeKwEybCcF2qoTQMyX24g",
+  "primary_phone_number_id": "idn_3KQSCnhtNlUbbXHJEn4hgkquzGu",
+  "primary_web3_wallet_id": null,
+  "password_enabled": false,
+  "two_factor_enabled": false,
+  "totp_enabled": false,
+  "backup_code_enabled": false,
+  "email_addresses": [
+    {
+      "id": "idn_3KQS9cIeKwEybCcF2qoTQMyX24g",
+      "object": "email_address",
+      "email_address": "dfrontend72@gmail.com",
+      "reserved": false,
+      "verification": {
+        "object": "verification_from_oauth",
+        "status": "verified",
+        "strategy": "from_oauth_google",
+        "attempts": null,
+        "expire_at": null
+      },
+      "linked_to": [
+        {
+          "type": "oauth_google",
+          "id": "idn_3KQS9iexv6SrnUtkzjTq90HN2dD"
+        }
+      ],
+      "matches_sso_connection": false,
+      "created_at": 1791488148579,
+      "updated_at": 1791488188063
+    }
+  ],
+  "phone_numbers": [
+    {
+      "id": "idn_3KQSCnhtNlUbbXHJEn4hgkquzGu",
+      "object": "phone_number",
+      "phone_number": "+15555550100",
+      "reserved_for_second_factor": false,
+      "default_second_factor": false,
+      "reserved": false,
+      "verification": {
+        "object": "verification_otp",
+        "status": "verified",
+        "strategy": "phone_code",
+        "channel": "sms",
+        "attempts": 1,
+        "expire_at": 1791488775156
+      },
+      "linked_to": [],
+      "backup_codes": null,
+      "created_at": 1791488173990,
+      "updated_at": 1791488188068
+    }
+  ],
+  "web3_wallets": [],
+  "passkeys": [],
+  "external_accounts": [
+    {
+      "object": "external_account",
+      "id": "eac_3KQS9gUpL4lgbzvk2kZlzPrBhMv",
+      "provider": "oauth_google",
+      "identification_id": "idn_3KQS9iexv6SrnUtkzjTq90HN2dD",
+      "provider_user_id": "100681182885774429556",
+      "approved_scopes": "email https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile openid profile",
+      "email_address": "dfrontend72@gmail.com",
+      "email_address_verified": true,
+      "first_name": "Carlos",
+      "last_name": "Valencia",
+      "avatar_url": "",
+      "username": null,
+      "phone_number": null,
+      "public_metadata": {},
+      "label": null,
+      "created_at": 1791488148565,
+      "updated_at": 1791488148565,
+      "verification": {
+        "object": "verification_oauth",
+        "status": "verified",
+        "strategy": "oauth_google",
+        "attempts": null,
+        "expire_at": 1791488745530
+      }
+    }
+  ],
+  "saml_accounts": [],
+  "enterprise_accounts": [],
+  "password_last_updated_at": null,
+  "public_metadata": {},
+  "private_metadata": {},
+  "unsafe_metadata": {},
+  "external_id": null,
+  "last_sign_in_at": 1791488188074,
+  "banned": false,
+  "locked": false,
+  "lockout_expires_in_seconds": null,
+  "verification_attempts_remaining": 10,
+  "created_at": 1791488188047,
+  "updated_at": 1791491501180,
+  "delete_self_enabled": true,
+  "bypass_client_trust": false,
+  "create_organization_enabled": true,
+  "last_active_at": 1791488188047,
+  "mfa_enabled_at": null,
+  "mfa_disabled_at": null,
+  "legal_accepted_at": null,
+  "requires_password_reset": false,
+  "deprovisioned": false,
+  "directories": [],
+  "profile_image_url": "https://www.gravatar.com/avatar?d=mp"
+}

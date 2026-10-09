@@ -1,4 +1,7 @@
+import type { GetSkillsData } from "#/dataconnect-generated";
+import { usePostHog } from "@posthog/react";
 import { Link } from "@tanstack/react-router";
+import { getCryptoAvatarUrl } from "../lib/avatar";
 import {
   ArrowBigUp,
   ArrowUpRight,
@@ -10,22 +13,41 @@ import {
 import { useState } from "react";
 
 type Props = {
-  item: SkillRecord;
+  item: GetSkillsData["skills"][number];
 };
 
 const SkillCard = ({ item }: Props) => {
+  const posthog = usePostHog();
   const [copied, setCopied] = useState(false);
+  const category = item.tags[0] ?? "Genaral";
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText(item.installCommand);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(item.installCommand);
+      posthog.capture("skill_install_command_copied", {
+        skill_id: item.id,
+        skill_category: category,
+        tag_count: item.tags.length,
+      });
+      posthog.logger.info("install_command_copied", {
+        skill_id: item.id,
+        skill_category: category,
+        tag_count: item.tags.length,
+      });
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      posthog.logger.warn("install_command_copy_failed", {
+        skill_category: category,
+      });
+      setCopied(false);
+    }
   };
 
   return (
     <article className="skill-card">
       <Link
-        to="/skills"
+        to="/"
         tabIndex={-1}
         aria-label={`Open ${item.title}`}
         className=" overlay"
@@ -43,16 +65,26 @@ const SkillCard = ({ item }: Props) => {
       <div className="body">
         <div className="meta">
           <div className="author">
-            <img src="/logo512.png" alt="author avatar" className="avatar" />
+            <img
+              src={
+                item.author.imageUrl || getCryptoAvatarUrl(item.author.clerkId)
+              }
+              alt={`${item.author.unsername} avatar`}
+              className="avatar"
+            />
             <div className="author-copy">
-              <p>Maick</p>
-              <p>{new Date(item.createdAt as string).toLocaleDateString()}</p>
+              <p>{item.author.unsername || "IA User"}</p>
+              <p>
+                {item.createdAt
+                  ? new Date(item.createdAt).toLocaleDateString()
+                  : "Unknown date"}
+              </p>
             </div>
           </div>
-          <p className="category">{item.category}</p>
+          <p className="category">{category}</p>
         </div>
         <div className="sumary">
-          <Link to="/skills" className="title-link">
+          <Link to="." className="title-link">
             <h3>{item.title}</h3>
           </Link>
           <p>{item.description}</p>
@@ -81,11 +113,11 @@ const SkillCard = ({ item }: Props) => {
 
             <div className="comments">
               <MessageSquare size={14} />
-              <span>{item.authorEmail ? 1 : 0}</span>
+              <span>{item.author.email ? 1 : 0}</span>
             </div>
           </div>
           <div className="actions">
-            <Link to="/skills" className="open" title={`Open ${item.title}`}>
+            <Link to="." className="open" title={`Open ${item.title}`}>
               <span>Open</span>
               <ArrowUpRight size={14} />
             </Link>
