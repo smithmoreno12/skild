@@ -1,0 +1,17 @@
+# This is a file for you to write an un-named mutation.
+# Only one un-named mutation is allowed per file.
+mutation {
+  skill_insert(
+    data: {
+      id: "11111111222233334444555555555555"
+      authorClerkId: "user_3KQSEhN9p2TO1jh4mEwnWdoG8jv"
+      createdAt: "2026-10-08T22:02:51.729Z"
+      description: "Generates clean, idiomatic code in any language given a natural-language specification."
+      installCommand: "agy skill install write-code"
+      promtConfig: "You are a profesional perfomance optimization engineer"
+      tags: ["coding", "generation", "typescript", "python"]
+      title: "Write Code"
+      usageExample: "Review the code and optimize it"
+    }
+  )
+}
